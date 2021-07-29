@@ -25,7 +25,6 @@ public class Auto_ROVER extends LinearOpMode {
     static final double     P_TURN_COEFF            = 0.1;
     static final double     P_DRIVE_COEFF           = 0.15;
 
-    private int k = 0;
 
 
     @Override
@@ -46,19 +45,16 @@ public class Auto_ROVER extends LinearOpMode {
         telemetry.addData(">", "Robot Ready.");
         telemetry.update();
 
-        if (k == 0) {
-            robot.lift.setPower(-0.3);
+        robot.lift.setPower(-0.3);
 
-            while (robot.lift.getPower() < 0 && !robot.topLimit.getState()){
-                telemetry.addData("Say", "Lifting...");
-                telemetry.update();
-            }
-
-            robot.lift.setPower(0.0);
-            robot.lift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            robot.lift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            k++;
+        while (robot.lift.getPower() < 0 && !robot.topLimit.getState()){
+             telemetry.addData("Say", "Lifting...");
+             telemetry.update();
         }
+
+        robot.lift.setPower(0.0);
+        robot.lift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.lift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         waitForStart();
         if (opModeIsActive()){

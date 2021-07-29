@@ -24,9 +24,7 @@ public class Hardware_ROVER
     DcMotor rightTrack;
     DcMotor lift;
     DcMotor drill;
-
-    Servo bulldozer;
-
+    
     ModernRoboticsI2cGyro gyro;
 
     ModernRoboticsI2cRangeSensor front;

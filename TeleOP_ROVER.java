@@ -14,8 +14,6 @@ public class TeleOP_ROVER extends LinearOpMode {
     double leftDrive, rightDrive;
     double brake = 1.0;
 
-    private int k = 0;
-
     @Override
     public void runOpMode() {
         robot.init(hardwareMap);
@@ -33,7 +31,6 @@ public class TeleOP_ROVER extends LinearOpMode {
         robot.lift.setPower(0.0);
         robot.lift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.lift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        k++;
 
         waitForStart();
         while (opModeIsActive()) {
