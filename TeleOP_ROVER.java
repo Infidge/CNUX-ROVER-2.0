@@ -7,8 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.TouchSensor;
 
 
-@TeleOp(name="TeleOP_Gaurel", group="Pushbot")
-@Disabled
+@TeleOp(name="TeleOP_ROVER", group="Pushbot")
 public class TeleOP_ROVER extends LinearOpMode {
 
     Hardware_ROVER robot           = new Hardware_ROVER();
@@ -24,30 +23,28 @@ public class TeleOP_ROVER extends LinearOpMode {
         telemetry.addData("Say", "Hello Driver");
         telemetry.update();
 
+        robot.lift.setPower(-0.3);
+
+        while (robot.lift.getPower() < 0 && !robot.topLimit.getState()){
+            telemetry.addData("Say", "Lifting...");
+            telemetry.update();
+        }
+
+        robot.lift.setPower(0.0);
+        robot.lift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.lift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        k++;
+
         waitForStart();
         while (opModeIsActive()) {
 
-            if (k == 0) {
-                robot.lift.setPower(-0.3);
-
-                while (robot.lift.getPower() < 0 && !robot.topLimit.getState()){
-                    telemetry.addData("Say", "Lifting...");
-                    telemetry.update();
-                }
-
-                robot.lift.setPower(0.0);
-                robot.lift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-                robot.lift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-                k++;
-            }
-
             if (Math.abs(gamepad1.right_stick_x) > 0.2){
-                leftDrive  = -gamepad1.left_stick_y + gamepad1.right_stick_x;
-                rightDrive = -gamepad1.left_stick_y - gamepad1.right_stick_x;
+                leftDrive  = (-gamepad1.left_stick_y + gamepad1.right_stick_x) * 0.5;
+                rightDrive = (-gamepad1.left_stick_y - gamepad1.right_stick_x) * 0.5;
             }
             else {
-                leftDrive  = -gamepad1.left_stick_y;
-                rightDrive = -gamepad1.left_stick_y;
+                leftDrive  = -gamepad1.left_stick_y * 0.5;
+                rightDrive = -gamepad1.left_stick_y * 0.5;
             }
 
             if (gamepad1.left_trigger > 0)

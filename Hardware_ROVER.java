@@ -20,10 +20,10 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 public class Hardware_ROVER
 {
 
-    DcMotorEx leftTrack;
-    DcMotorEx rightTrack;
-    DcMotorEx lift;
-    DcMotorEx drill;
+    DcMotor leftTrack;
+    DcMotor rightTrack;
+    DcMotor lift;
+    DcMotor drill;
 
     Servo bulldozer;
 
@@ -47,25 +47,25 @@ public class Hardware_ROVER
     public void init(HardwareMap ahwMap) {
         hwMap = ahwMap;
 
-        leftTrack = hwMap.get(DcMotorEx.class, "leftTrack");
+        leftTrack = hwMap.get(DcMotor.class, "leftTrack");
         leftTrack.setDirection(DcMotorSimple.Direction.FORWARD);
         leftTrack.setPower(0);
         leftTrack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         leftTrack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        rightTrack = hwMap.get(DcMotorEx.class, "rightTrack");
+        rightTrack = hwMap.get(DcMotor.class, "rightTrack");
         rightTrack.setDirection(DcMotorSimple.Direction.REVERSE);
         rightTrack.setPower(0);
         rightTrack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rightTrack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        lift = hwMap.get(DcMotorEx.class, "lift");
+        lift = hwMap.get(DcMotor.class, "lift");
         lift.setDirection(DcMotorSimple.Direction.REVERSE);
         lift.setPower(0);
         lift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         lift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        drill = hwMap.get(DcMotorEx.class, "drill");
+        drill = hwMap.get(DcMotor.class, "drill");
         drill.setDirection(DcMotorSimple.Direction.REVERSE);
         drill.setPower(0);
         drill.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
